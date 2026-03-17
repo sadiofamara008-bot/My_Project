@@ -3,21 +3,21 @@
 Bienvenue dans le référentiel de notre Projet Final de traitement de données
 
 ## Contenu du dépôt
-data/: toutes les données
+* data/: toutes les données
 
-scripts/: scripts R numérotés à exécuter dans l'ordre
+* scripts/: scripts R numérotés à exécuter dans l'ordre
 
-R/: fonctions réutilisables
+* R/: fonctions réutilisables
 
-notebooks/: analyses exploratoires
+* notebooks/: analyses exploratoires
 
-figures/: graphiques exportés
+* figures/: graphiques exportés
 
-outputs/: rapports finaux
+* outputs/: rapports finaux
 
-docs/: documentation
+* docs/: documentation
 
-logs/: Journaux d'exécution
+* logs/: Journaux d'exécution
 
 
 ## Instructions d'installation
