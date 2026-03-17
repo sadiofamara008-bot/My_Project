@@ -25,7 +25,11 @@ Bienvenue dans le référentiel de notre Projet Final de traitement de données
 
 
 
+## Comment démarre
 
+1. Ouvrir MonProjet.Rprojdans RStudio
+2. Lancer scripts/00_setup.Ren premier
+3. Exécuter les scripts dans l’ordre 00 → 06
 
 
 
