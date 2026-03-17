@@ -1,0 +1,56 @@
+---
+title: "Dictionnaire des données"
+output:
+  html_document:
+    toc: true
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+> 📖 Ce document décrit toutes les variables de votre projet.
+> Mettez-le à jour à chaque fois que vous ajoutez ou modifiez une variable.
+
+---
+
+## Description générale du jeu de données
+
+| Champ         | Valeur                          |
+|---------------|---------------------------------|
+| Nom           | *(à compléter)*                 |
+| Source        | *(à compléter)*                 |
+| Date collecte | *(à compléter)*                 |
+| Nb de lignes  | *(à compléter)*                 |
+| Nb colonnes   | *(à compléter)*                 |
+
+---
+
+## Dictionnaire des variables
+
+```{r tableau_variables}
+dictionnaire <- data.frame(
+  Variable    = c("variable_1", "variable_2", "variable_3"),
+  Type        = c("numérique", "texte", "date"),
+  Description = c(
+    "Décrivez ce que représente cette variable",
+    "Décrivez ce que représente cette variable",
+    "Décrivez ce que représente cette variable"
+  ),
+  Valeurs     = c("ex: 0 à 100", "ex: 'oui', 'non'", "format JJ/MM/AAAA"),
+  NA_autorise = c("Non", "Oui", "Non")
+)
+
+knitr::kable(dictionnaire, caption = "Variables du projet")
+```
+
+---
+
+## Notes méthodologiques
+
+> ✍️ Notez ici les choix méthodologiques importants :
+>
+> - Pourquoi vous avez exclu certaines lignes
+> - Comment vous avez géré les valeurs manquantes
+> - Sources des données externes utilisées

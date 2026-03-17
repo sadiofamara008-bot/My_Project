@@ -1,0 +1,69 @@
+---
+title: "05 — Visualisations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+## 1. Charger les données
+
+```{r charger}
+df <- readRDS(file.path(path_processed, "03_transformed.rds"))
+```
+
+## 2. Thème graphique personnalisé
+
+```{r theme}
+mon_theme <- ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(
+    plot.title    = ggplot2::element_text(face = "bold"),
+    plot.subtitle = ggplot2::element_text(color = "grey50"),
+    legend.position = "bottom"
+  )
+```
+
+## 3. Graphique 1 — Distribution (histogramme)
+
+```{r histo, eval=FALSE}
+# p1 <- ggplot2::ggplot(df, ggplot2::aes(x = votre_variable)) +
+#   ggplot2::geom_histogram(fill = "#3182bd", color = "white", bins = 30) +
+#   ggplot2::labs(title = "Distribution de votre variable",
+#                 x = "Valeur", y = "Fréquence") +
+#   mon_theme
+#
+# print(p1)
+# ggplot2::ggsave(file.path(path_figures, "01_distribution.png"),
+#                 plot = p1, width = 8, height = 5, dpi = 300)
+# cat("✅ Graphique 1 sauvegardé\n")
+```
+
+## 4. Graphique 2 — Comparaison par groupe (barres)
+
+```{r barres, eval=FALSE}
+# p2 <- ggplot2::ggplot(df, ggplot2::aes(x = groupe, y = valeur, fill = groupe)) +
+#   ggplot2::geom_col() +
+#   ggplot2::labs(title = "Comparaison par groupe",
+#                 x = "Groupe", y = "Valeur") +
+#   mon_theme
+#
+# ggplot2::ggsave(file.path(path_figures, "02_barres.png"),
+#                 plot = p2, width = 8, height = 5, dpi = 300)
+# cat("✅ Graphique 2 sauvegardé\n")
+```
+
+## 5. Graphique 3 — Évolution dans le temps
+
+```{r serie_temp, eval=FALSE}
+# p3 <- ggplot2::ggplot(df, ggplot2::aes(x = date_col, y = valeur)) +
+#   ggplot2::geom_line(color = "#e6550d", linewidth = 1) +
+#   ggplot2::labs(title = "Évolution au fil du temps",
+#                 x = "Date", y = "Valeur") +
+#   mon_theme
+#
+# ggplot2::ggsave(file.path(path_figures, "03_serie_temp.png"),
+#                 plot = p3, width = 10, height = 5, dpi = 300)
+# cat("✅ Graphique 3 sauvegardé\n")
+```

@@ -1,0 +1,61 @@
+---
+title: "04 — Analyses statistiques"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+## 1. Charger les données prêtes
+
+```{r charger}
+df <- readRDS(file.path(path_processed, "03_transformed.rds"))
+cat("✅ Données chargées :", nrow(df), "lignes\n")
+```
+
+## 2. Statistiques descriptives
+
+```{r stats_desc}
+summary(df)
+```
+
+## 3. Analyses par groupe
+
+```{r par_groupe, eval=FALSE}
+# Exemple : moyenne par groupe
+# df %>%
+#   dplyr::group_by(groupe) %>%
+#   dplyr::summarise(
+#     moyenne = mean(valeur, na.rm = TRUE),
+#     mediane = median(valeur, na.rm = TRUE),
+#     n       = dplyr::n()
+#   )
+```
+
+## 4. Test statistique (exemple t-test)
+
+```{r test, eval=FALSE}
+# Exemple : comparer deux groupes
+# t.test(valeur ~ groupe, data = df)
+```
+
+## 5. Régression linéaire (exemple)
+
+```{r regression, eval=FALSE}
+# modele <- lm(variable_cible ~ variable1 + variable2, data = df)
+# summary(modele)
+```
+
+## 6. Tableau de résultats
+
+```{r tableau, eval=FALSE}
+# Sauvegarder un tableau résumé
+# resultats <- df %>%
+#   dplyr::group_by(categorie) %>%
+#   dplyr::summarise(total = sum(valeur, na.rm = TRUE))
+#
+# readr::write_csv(resultats, file.path(path_outputs, "04_resultats.csv"))
+# cat("✅ Résultats exportés dans outputs/\n")
+```

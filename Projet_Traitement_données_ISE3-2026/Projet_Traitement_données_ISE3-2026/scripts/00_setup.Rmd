@@ -1,0 +1,60 @@
+---
+title: "00 — Configuration du projet"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Chargement des packages
+
+```{r packages}
+# Installe les packages manquants automatiquement
+packages <- c("tidyverse", "readxl", "janitor", "skimr", "here", "lubridate")
+
+installed <- packages %in% rownames(installed.packages())
+if (any(!installed)) install.packages(packages[!installed])
+
+lapply(packages, library, character.only = TRUE)
+```
+
+## 2. Définition des chemins
+
+```{r chemins}
+# Tous les chemins du projet
+path_raw       <- here::here("data", "raw")
+path_external  <- here::here("data", "external")
+path_interim   <- here::here("data", "interim")
+path_processed <- here::here("data", "processed")
+path_final     <- here::here("data", "final")
+path_figures   <- here::here("figures")
+path_outputs   <- here::here("outputs")
+path_logs      <- here::here("logs")
+
+cat("✅ Chemins définis avec succès\n")
+```
+
+## 3. Options globales
+
+```{r options}
+options(scipen = 999)          # Pas de notation scientifique
+options(stringsAsFactors = FALSE)
+Sys.setlocale("LC_TIME", "fr_FR.UTF-8")  # Dates en français
+
+cat("✅ Options configurées\n")
+```
+
+## 4. Vérification de la structure
+
+```{r verification}
+dossiers <- c(path_raw, path_external, path_interim,
+              path_processed, path_final, path_figures,
+              path_outputs, path_logs)
+
+for (d in dossiers) {
+  if (!dir.exists(d)) dir.create(d, recursive = TRUE)
+}
+
+cat("✅ Structure du projet vérifiée\n")
+```

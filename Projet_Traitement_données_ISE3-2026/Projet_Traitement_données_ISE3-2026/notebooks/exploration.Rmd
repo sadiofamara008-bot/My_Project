@@ -1,0 +1,59 @@
+---
+title: "Exploration exploratoire des données"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+> 📓 Ce notebook est votre **espace libre** pour explorer, tester des idées,
+> visualiser rapidement. Il ne fait pas partie du pipeline principal.
+
+---
+
+## 1. Chargement des données
+
+```{r charger, eval=FALSE}
+# Chargez vos données ici pour explorer
+df <- readRDS(file.path(path_interim, "01_raw.rds"))
+dplyr::glimpse(df)
+```
+
+## 2. Exploration visuelle rapide
+
+```{r explorer, eval=FALSE}
+# Résumé complet
+skimr::skim(df)
+```
+
+## 3. Graphiques rapides (sans ggplot)
+
+```{r graphiques_rapides, eval=FALSE}
+# Histogramme rapide d'une colonne numérique
+# hist(df$votre_colonne, main = "Distribution", xlab = "Valeur", col = "steelblue")
+
+# Boîte à moustaches
+# boxplot(df$votre_colonne, main = "Boxplot")
+```
+
+## 4. Corrélations
+
+```{r correlations, eval=FALSE}
+# Matrice de corrélation sur les colonnes numériques
+numeriques <- df %>% dplyr::select(where(is.numeric))
+cor(numeriques, use = "complete.obs")
+```
+
+## 5. Notes et observations
+
+> ✍️ Notez ici vos observations, anomalies ou idées d'analyse :
+>
+> - Observation 1 :
+> - Observation 2 :
+> - Questions à creuser :

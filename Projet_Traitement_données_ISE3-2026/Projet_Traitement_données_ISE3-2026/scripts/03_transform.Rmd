@@ -1,0 +1,65 @@
+---
+title: "03 — Transformations et préparation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+## 1. Charger les données nettoyées
+
+```{r charger}
+df <- readRDS(file.path(path_interim, "02_clean.rds"))
+cat("✅ Données chargées :", nrow(df), "lignes\n")
+```
+
+## 2. Créer de nouvelles variables
+
+```{r nouvelles_variables, eval=FALSE}
+# Exemples — adaptez selon votre projet
+df <- df %>%
+  dplyr::mutate(
+    # Exemple : calculer un ratio
+    # ratio = colonne_a / colonne_b,
+
+    # Exemple : créer une catégorie
+    # categorie = dplyr::case_when(
+    #   valeur > 100 ~ "élevé",
+    #   valeur > 50  ~ "moyen",
+    #   TRUE         ~ "faible"
+    # ),
+
+    # Exemple : extraire l'année d'une date
+    # annee = lubridate::year(date_col)
+  )
+```
+
+## 3. Filtrer les données si nécessaire
+
+```{r filtrer, eval=FALSE}
+# Exemple : garder seulement certaines années ou catégories
+# df <- df %>% dplyr::filter(annee >= 2020)
+```
+
+## 4. Fusionner avec une autre table (si besoin)
+
+```{r fusion, eval=FALSE}
+# df2 <- readRDS(file.path(path_interim, "autre_table.rds"))
+# df <- dplyr::left_join(df, df2, by = "id_commun")
+```
+
+## 5. Résumé après transformation
+
+```{r resume}
+dplyr::glimpse(df)
+```
+
+## 6. Sauvegarder dans processed/
+
+```{r sauvegarder}
+saveRDS(df, file.path(path_processed, "03_transformed.rds"))
+readr::write_csv(df, file.path(path_processed, "03_transformed.csv"))
+cat("✅ Données transformées sauvegardées dans data/processed/\n")
+```

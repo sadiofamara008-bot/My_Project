@@ -1,0 +1,62 @@
+---
+title: "01 — Import des données brutes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+## 1. Lister les fichiers disponibles dans data/raw/
+
+```{r lister_fichiers}
+fichiers <- list.files(path_raw, full.names = TRUE)
+
+if (length(fichiers) == 0) {
+  cat("⚠️ Aucun fichier trouvé dans data/raw/\n")
+  cat("👉 Déposez vos fichiers CSV ou Excel dans ce dossier.\n")
+} else {
+  cat("✅ Fichiers trouvés :\n")
+  print(fichiers)
+}
+```
+
+## 2. Charger un fichier CSV (exemple)
+
+```{r charger_csv, eval=FALSE}
+# Remplacez "mon_fichier.csv" par le nom réel de votre fichier
+df_raw <- readr::read_csv(
+  file.path(path_raw, "mon_fichier.csv"),
+  locale = readr::locale(encoding = "UTF-8")
+)
+
+cat("✅ Données chargées :", nrow(df_raw), "lignes /", ncol(df_raw), "colonnes\n")
+```
+
+## 3. Charger un fichier Excel (exemple)
+
+```{r charger_excel, eval=FALSE}
+# Remplacez "mon_fichier.xlsx" et l'onglet si nécessaire
+df_raw <- readxl::read_excel(
+  file.path(path_raw, "mon_fichier.xlsx"),
+  sheet = 1
+)
+
+cat("✅ Données chargées :", nrow(df_raw), "lignes /", ncol(df_raw), "colonnes\n")
+```
+
+## 4. Premier aperçu des données
+
+```{r apercu, eval=FALSE}
+# Affiche un résumé rapide
+dplyr::glimpse(df_raw)
+head(df_raw, 10)
+```
+
+## 5. Sauvegarder en format R pour la suite
+
+```{r sauvegarder, eval=FALSE}
+saveRDS(df_raw, file.path(path_interim, "01_raw.rds"))
+cat("✅ Données sauvegardées dans data/interim/01_raw.rds\n")
+```

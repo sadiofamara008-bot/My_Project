@@ -1,0 +1,67 @@
+---
+title: "02 — Nettoyage et contrôle qualité"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+## 1. Charger les données intermédiaires
+
+```{r charger}
+df <- readRDS(file.path(path_interim, "01_raw.rds"))
+cat("✅ Données chargées :", nrow(df), "lignes /", ncol(df), "colonnes\n")
+```
+
+## 2. Nettoyer les noms de colonnes
+
+```{r noms_colonnes}
+# janitor met les noms en minuscules sans espaces ni accents
+df <- janitor::clean_names(df)
+cat("✅ Noms de colonnes nettoyés\n")
+names(df)
+```
+
+## 3. Supprimer les doublons
+
+```{r doublons}
+n_avant <- nrow(df)
+df <- dplyr::distinct(df)
+n_apres <- nrow(df)
+cat("✅ Doublons supprimés :", n_avant - n_apres, "ligne(s) retirée(s)\n")
+```
+
+## 4. Gérer les valeurs manquantes
+
+```{r valeurs_manquantes}
+# Résumé des NA par colonne
+na_resume <- colSums(is.na(df))
+print(na_resume[na_resume > 0])
+
+# Option : supprimer les lignes avec trop de NA (ex: plus de 50%)
+# df <- df[rowMeans(is.na(df)) < 0.5, ]
+```
+
+## 5. Corriger les types de variables
+
+```{r types, eval=FALSE}
+# Exemples — adaptez selon vos colonnes
+# df$date_col    <- as.Date(df$date_col, format = "%d/%m/%Y")
+# df$nombre_col  <- as.numeric(df$nombre_col)
+# df$categorie   <- as.factor(df$categorie)
+```
+
+## 6. Contrôle qualité rapide
+
+```{r qa}
+skimr::skim(df)
+```
+
+## 7. Sauvegarder les données nettoyées
+
+```{r sauvegarder}
+saveRDS(df, file.path(path_interim, "02_clean.rds"))
+cat("✅ Données nettoyées sauvegardées dans data/interim/02_clean.rds\n")
+```

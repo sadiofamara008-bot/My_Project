@@ -1,0 +1,54 @@
+---
+title: "06 — Export des résultats finaux"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source(here::here("scripts", "00_setup.R"))
+```
+
+## 1. Charger les données finales
+
+```{r charger}
+df <- readRDS(file.path(path_processed, "03_transformed.rds"))
+cat("✅ Données chargées :", nrow(df), "lignes\n")
+```
+
+## 2. Exporter en CSV
+
+```{r export_csv, eval=FALSE}
+readr::write_csv(df, file.path(path_final, "donnees_finales.csv"))
+cat("✅ CSV exporté dans data/final/\n")
+```
+
+## 3. Exporter en RDS (format R natif)
+
+```{r export_rds, eval=FALSE}
+saveRDS(df, file.path(path_final, "donnees_finales.rds"))
+cat("✅ RDS exporté dans data/final/\n")
+```
+
+## 4. Exporter en Excel
+
+```{r export_excel, eval=FALSE}
+# install.packages("writexl") si pas encore installé
+# writexl::write_xlsx(df, file.path(path_final, "donnees_finales.xlsx"))
+# cat("✅ Excel exporté dans data/final/\n")
+```
+
+## 5. Générer un log de fin d'exécution
+
+```{r log}
+log_text <- paste0(
+  "=== LOG D'EXPORTATION ===\n",
+  "Date       : ", Sys.time(), "\n",
+  "Lignes     : ", nrow(df), "\n",
+  "Colonnes   : ", ncol(df), "\n",
+  "Utilisateur: ", Sys.getenv("USER"), "\n"
+)
+
+writeLines(log_text, file.path(path_logs, "06_export_log.txt"))
+cat(log_text)
+cat("✅ Log sauvegardé dans logs/\n")
+```

@@ -1,0 +1,81 @@
+---
+title: "Fonctions utilitaires réutilisables"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+> Ce fichier contient des fonctions que vous pouvez appeler depuis n'importe quel script avec :
+> `source(here::here("R", "utils.Rmd"))`
+
+---
+
+## Fonction 1 — Résumé rapide d'un dataframe
+
+```{r fn_resume}
+resumer_df <- function(df, titre = "Résumé") {
+  cat("=====", titre, "=====\n")
+  cat("Lignes   :", nrow(df), "\n")
+  cat("Colonnes :", ncol(df), "\n")
+  cat("NA total :", sum(is.na(df)), "\n")
+  cat("=======================\n")
+}
+
+# Exemple d'utilisation :
+# resumer_df(mon_dataframe, "Données brutes")
+```
+
+## Fonction 2 — Sauvegarder avec horodatage
+
+```{r fn_save}
+sauvegarder_rds <- function(df, dossier, nom_fichier) {
+  horodatage <- format(Sys.time(), "%Y%m%d_%H%M%S")
+  chemin <- file.path(dossier, paste0(nom_fichier, "_", horodatage, ".rds"))
+  saveRDS(df, chemin)
+  cat("✅ Fichier sauvegardé :", chemin, "\n")
+}
+
+# Exemple :
+# sauvegarder_rds(df_clean, path_interim, "clean")
+```
+
+## Fonction 3 — Vérifier les doublons
+
+```{r fn_doublons}
+verifier_doublons <- function(df, colonnes = NULL) {
+  if (is.null(colonnes)) {
+    n_doublons <- sum(duplicated(df))
+  } else {
+    n_doublons <- sum(duplicated(df[, colonnes]))
+  }
+  cat("🔍 Doublons détectés :", n_doublons, "\n")
+  return(n_doublons)
+}
+
+# Exemple :
+# verifier_doublons(df)
+# verifier_doublons(df, colonnes = c("id", "date"))
+```
+
+## Fonction 4 — Rapport des valeurs manquantes
+
+```{r fn_na}
+rapport_na <- function(df) {
+  na_df <- data.frame(
+    colonne    = names(df),
+    n_na       = colSums(is.na(df)),
+    pct_na     = round(colMeans(is.na(df)) * 100, 1)
+  )
+  na_df <- na_df[na_df$n_na > 0, ]
+  if (nrow(na_df) == 0) {
+    cat("✅ Aucune valeur manquante !\n")
+  } else {
+    print(na_df)
+  }
+}
+
+# Exemple :
+# rapport_na(df)
+```
