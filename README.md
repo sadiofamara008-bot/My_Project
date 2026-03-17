@@ -23,7 +23,7 @@ Bienvenue dans le référentiel de notre Projet Final de traitement de données
 ## Instructions d'installation
 1. Clonez ce dépôt pour les fichiers dans votre ordinateur en local 
 
-
+git clone https://github.com/sadiofamara008-bot/My_Project.git
 
 
 
