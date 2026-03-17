@@ -1,8 +1,8 @@
 # Projet Final_Traitement de données_ISE3-2026
 
-Décrivez ici l'objectif de votre projet en quelques phrases.
+Bienvenue dans le référentiel de notre Projet final de traitement de données
 
-## Structure
+## Contenu du dépôt
 - `data/` : toutes les données
 - `scripts/` : scripts R numérotés à exécuter dans l'ordre
 - `R/` : fonctions réutilisables
